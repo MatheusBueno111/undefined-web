@@ -1,8 +1,8 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom'
-import Home from './styles/pages/Home'
+import Home from './pages/Home'
 import SideBar from './components/SideBar'
-import History from './styles/pages/History'
-import Settings from './styles/pages/Settings'
+import History from './pages/History'
+import Settings from './pages/Settings'
 import { styled } from 'styled-components'
 
 const Container = styled.div`

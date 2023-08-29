@@ -4,6 +4,8 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from 'phosphor-react'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../../services/firebase'
 
 const createNewClientFormSchema = z.object({
   username: z
@@ -31,9 +33,20 @@ const CreateNewClient: React.FC = () => {
   const email = watch('email')
   const username = watch('username')
   const isSubmitDisabled = !email || !username
-
-  const createNewClient = (data: CreateNewClientFormData) => {
-    console.log('data', data)
+  const usersCollectionRef = collection(db, 'users')
+  const createNewClient = async ({
+    email,
+    username,
+  }: CreateNewClientFormData) => {
+    const currentDate = new Date()
+    const formattedDate = currentDate.toISOString()
+    const newProduct = {
+      email,
+      username,
+      created_at: formattedDate,
+    }
+    await addDoc(usersCollectionRef, newProduct)
+    console.log('product', newProduct)
   }
 
   return (
