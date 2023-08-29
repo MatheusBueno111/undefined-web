@@ -2,13 +2,14 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { defaultTheme } from './styles/themes/default'
 import GlobalStyle from './styles/global'
-import Home from './styles/pages/Home'
+import { RouterProvider } from 'react-router-dom'
+import { router } from './Routes'
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <Home />
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }
