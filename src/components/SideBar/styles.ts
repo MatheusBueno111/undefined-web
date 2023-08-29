@@ -9,6 +9,7 @@ interface NavButtonProps extends Props {
 }
 
 export const Container = styled.aside<Props>`
+  position: absolute;
   display: flex;
   flex-direction: column;
 
