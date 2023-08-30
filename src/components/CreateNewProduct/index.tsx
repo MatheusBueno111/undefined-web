@@ -22,6 +22,7 @@ const CreateNewProduct: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm<CreateNewClientFormData>({
     resolver: zodResolver(createNewProductFormSchema),
   })
@@ -33,10 +34,11 @@ const CreateNewProduct: React.FC = () => {
     const currentDate = new Date()
     const formattedDate = currentDate.toISOString()
     const newProduct = {
-      product,
-      created_at: formattedDate,
+      name: product,
+      createdAt: formattedDate,
     }
     await addDoc(productsCollectionRef, newProduct)
+    reset()
     console.log('product', newProduct)
   }
 

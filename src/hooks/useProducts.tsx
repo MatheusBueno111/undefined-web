@@ -5,7 +5,6 @@ export function useProducts() {
   const { data: products, isLoading } = useQuery({
     queryFn: () => fetchProducts(),
     queryKey: ['products'],
-    staleTime: 60 * 1000, // 1 minute
   })
 
   return { products, isLoading }

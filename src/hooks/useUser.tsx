@@ -5,8 +5,7 @@ export function useUsers() {
   const { data: users, isLoading } = useQuery({
     queryFn: () => fetchUsers(),
     queryKey: ['users'],
-    staleTime: 60 * 1000, // 1 minute
   })
-
+  console.log(users)
   return { users, isLoading }
 }

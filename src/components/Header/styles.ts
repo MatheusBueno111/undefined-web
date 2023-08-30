@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const Container = styled.header`
   display: flex;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.backgroundLight};
+  background-color: ${({ theme }) => theme.colors.white};
   padding: 3rem;
   flex-direction: row;
   height: fit-content;

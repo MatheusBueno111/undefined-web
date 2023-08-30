@@ -34,6 +34,7 @@ export const Input = styled.input`
   border: none;
   padding: 0.8rem;
   border-radius: 0.6rem;
+  background-color: ${({ theme }) => theme.colors.backgroundLight};
 `
 
 export const Button = styled.button`

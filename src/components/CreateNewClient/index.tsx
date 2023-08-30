@@ -26,6 +26,7 @@ const CreateNewClient: React.FC = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm<CreateNewClientFormData>({
     resolver: zodResolver(createNewClientFormSchema),
   })
@@ -43,9 +44,10 @@ const CreateNewClient: React.FC = () => {
     const newProduct = {
       email,
       username,
-      created_at: formattedDate,
+      createdAt: formattedDate,
     }
     await addDoc(usersCollectionRef, newProduct)
+    reset()
     console.log('product', newProduct)
   }
 

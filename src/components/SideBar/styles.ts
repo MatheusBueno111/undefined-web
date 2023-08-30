@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
 interface Props {
@@ -20,18 +21,13 @@ export const Container = styled.aside<Props>`
   color: ${({ theme }) => theme.colors.white};
   padding: 4rem 0 1.6rem 1.6rem;
   gap: 4.8rem;
-  transition: all 0.2s ease-out;
+  transition: all 0.3s ease-out;
 `
 
 export const NavBar = styled.nav`
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
-
-  a {
-    all: unset;
-    display: flex;
-  }
 `
 
 export const NavHeaderButton = styled.button<Props>`
@@ -40,14 +36,14 @@ export const NavHeaderButton = styled.button<Props>`
   margin-right: ${({ $isOpen }) => ($isOpen ? 'unset' : '1.6')};
 `
 
-export const NavButton = styled.button<NavButtonProps>`
+export const NavButton = styled(Link)<NavButtonProps>`
   display: flex;
   flex: 1;
   flex-direction: row;
-  gap: ${({ $isOpen }) => ($isOpen ? '1.2rem' : 'unset')};
-  justify-content: ${({ $isOpen }) => ($isOpen ? 'unset' : 'center')};
+  gap: ${({ $isOpen }) => ($isOpen ? '1rem' : 'unset')};
+  /* justify-content: ${({ $isOpen }) => ($isOpen ? 'center' : 'center')}; */
   font-size: 1.8rem;
-  align-items: center;
+
   padding: 0.8rem 1.2rem;
   font-weight: 700;
   background-color: ${({ theme, selected }) =>
@@ -57,6 +53,12 @@ export const NavButton = styled.button<NavButtonProps>`
 
   span {
     display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+    visibility: ${({ $isOpen }) => ($isOpen ? 'visible' : 'hidden')};
+  }
+  .link-icon {
+    display: flex;
+    justify-content: center;
+    width: ${({ $isOpen }) => ($isOpen ? 'unset' : '100%')};
   }
 
   &:hover {

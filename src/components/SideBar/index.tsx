@@ -1,12 +1,46 @@
 import React, { ComponentProps, useState } from 'react'
 import * as S from './styles'
-import { Command, FileSearch, Gear, List } from 'phosphor-react'
-import { Link } from 'react-router-dom'
+import {
+  Coffee,
+  Command,
+  FileSearch,
+  Gear,
+  List,
+  UserCircle,
+} from 'phosphor-react'
 
 type SideBarProps = ComponentProps<'aside'>
 
+const links = [
+  {
+    linkName: 'Dashboard',
+    icon: <Command size={24} weight="bold" />,
+    path: '/',
+  },
+  {
+    linkName: 'Produtos',
+    icon: <Coffee size={24} weight="bold" />,
+    path: '/products',
+  },
+  {
+    linkName: 'Usuários',
+    icon: <UserCircle size={24} weight="bold" />,
+    path: '/users',
+  },
+  {
+    linkName: 'Histórico',
+    icon: <FileSearch size={24} weight="bold" />,
+    path: '/history',
+  },
+  {
+    linkName: 'Settings',
+    icon: <Gear size={24} weight="bold" />,
+    path: '/settings',
+  },
+]
+
 const SideBar: React.FC<SideBarProps> = ({ ...rest }) => {
-  const [selectedItem, setSelectedItem] = useState('dashboard')
+  const [selectedItem, setSelectedItem] = useState('Dashboard')
   const [isOpen, setIsOpen] = useState(false)
   const toggleSideBar = () => {
     setIsOpen((value) => !value)
@@ -17,36 +51,18 @@ const SideBar: React.FC<SideBarProps> = ({ ...rest }) => {
         <S.NavHeaderButton $isOpen={isOpen} onClick={toggleSideBar}>
           <List size={48} />
         </S.NavHeaderButton>
-        <Link to="/">
+        {links.map((link) => (
           <S.NavButton
+            to={link.path}
+            key={link.linkName}
             $isOpen={isOpen}
-            selected={selectedItem === 'dashboard'}
-            onClick={() => setSelectedItem('dashboard')}
+            selected={selectedItem === link.linkName}
+            onClick={() => setSelectedItem(link.linkName)}
           >
-            <Command size={24} weight="bold" />
-            <span>Dashboard</span>
+            <div className="link-icon">{link.icon}</div>
+            <span>{link.linkName}</span>
           </S.NavButton>
-        </Link>
-        <Link to="/history">
-          <S.NavButton
-            $isOpen={isOpen}
-            selected={selectedItem === 'history'}
-            onClick={() => setSelectedItem('history')}
-          >
-            <FileSearch size={24} weight="bold" />
-            <span>History</span>
-          </S.NavButton>
-        </Link>
-        <Link to="/settings">
-          <S.NavButton
-            $isOpen={isOpen}
-            selected={selectedItem === 'settings'}
-            onClick={() => setSelectedItem('settings')}
-          >
-            <Gear size={24} weight="bold" />
-            <span>Settings</span>
-          </S.NavButton>
-        </Link>
+        ))}
       </S.NavBar>
     </S.Container>
   )
