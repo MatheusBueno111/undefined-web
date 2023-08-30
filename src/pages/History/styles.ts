@@ -33,7 +33,7 @@ export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: 75rem; /* Defina a altura máxima desejada */
+  max-height: 65rem; /* Defina a altura máxima desejada */
   overflow-y: auto;
 
   scrollbar-width: thin;
