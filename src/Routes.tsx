@@ -1,8 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home'
 import SideBar from './components/SideBar'
-
-import Settings from './pages/Settings'
 import UsersTable from './pages/UsersTable'
 import { styled } from 'styled-components'
 import ProductsTable from './pages/ProductsTable'
@@ -26,7 +24,7 @@ const Layout = () => {
 export const router = createBrowserRouter([
   {
     path: '/',
-    index: false,
+
     element: <Layout />,
     children: [
       {
@@ -37,22 +35,14 @@ export const router = createBrowserRouter([
       {
         path: '/products',
         element: <ProductsTable />,
-        index: false,
       },
       {
         path: '/users',
         element: <UsersTable />,
-        index: false,
       },
       {
         path: '/history',
         element: <History />,
-        index: false,
-      },
-      {
-        path: '/settings',
-        element: <Settings />,
-        index: false,
       },
     ],
   },

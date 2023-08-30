@@ -1,13 +1,7 @@
 import React, { ComponentProps, useState } from 'react'
 import * as S from './styles'
-import {
-  Coffee,
-  Command,
-  FileSearch,
-  Gear,
-  List,
-  UserCircle,
-} from 'phosphor-react'
+import { Coffee, Command, FileSearch, List, UserCircle } from 'phosphor-react'
+import { useLocation } from 'react-router-dom'
 
 type SideBarProps = ComponentProps<'aside'>
 
@@ -32,15 +26,11 @@ const links = [
     icon: <FileSearch size={24} weight="bold" />,
     path: '/history',
   },
-  {
-    linkName: 'Settings',
-    icon: <Gear size={24} weight="bold" />,
-    path: '/settings',
-  },
 ]
 
 const SideBar: React.FC<SideBarProps> = ({ ...rest }) => {
-  const [selectedItem, setSelectedItem] = useState('Dashboard')
+  const location = useLocation()
+
   const [isOpen, setIsOpen] = useState(false)
   const toggleSideBar = () => {
     setIsOpen((value) => !value)
@@ -56,8 +46,7 @@ const SideBar: React.FC<SideBarProps> = ({ ...rest }) => {
             to={link.path}
             key={link.linkName}
             $isOpen={isOpen}
-            selected={selectedItem === link.linkName}
-            onClick={() => setSelectedItem(link.linkName)}
+            selected={location.pathname === link.path}
           >
             <div className="link-icon">{link.icon}</div>
             <span>{link.linkName}</span>

@@ -12,22 +12,29 @@ const ProductsTable: React.FC = () => {
       <h2>Produtos</h2>
       <S.Table>
         <S.TableHead>
-          <S.TableRow>
+          <S.TableRow className="table-head">
             <S.TableHeader>Nome</S.TableHeader>
             <S.TableHeader>Id</S.TableHeader>
             <S.TableHeader>Criado em</S.TableHeader>
           </S.TableRow>
         </S.TableHead>
         <S.TableBody>
-          {products
-            ? products?.map((product) => (
-                <S.TableRow key={product.id}>
-                  <S.TableData>{product.name}</S.TableData>
-                  <S.TableData>{product.id}</S.TableData>
-                  <S.TableData>{formatDate(product.createdAt)}</S.TableData>
-                </S.TableRow>
-              ))
-            : null}
+          {products ? (
+            products?.map((product) => (
+              <S.TableRow key={product.id}>
+                <S.TableData>{product.name}</S.TableData>
+                <S.TableData>{product.id}</S.TableData>
+                <S.TableData>{formatDate(product.createdAt)}</S.TableData>
+              </S.TableRow>
+            ))
+          ) : (
+            <S.TableRow>
+              <S.TableData>-</S.TableData>
+              <S.TableData>-</S.TableData>
+              <S.TableData>-</S.TableData>
+              <S.TableData>-</S.TableData>
+            </S.TableRow>
+          )}
         </S.TableBody>
       </S.Table>
     </S.Container>

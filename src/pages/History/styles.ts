@@ -8,16 +8,9 @@ export const Container = styled.div`
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.background};
   gap: 1rem;
-  h2 {
-    display: flex;
-    padding: 1rem;
-    text-align: center;
-    align-self: center;
-    justify-content: center;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
-    border-radius: 0.6rem;
-    width: 100%;
-    background-color: ${({ theme }) => theme.colors.white};
+
+  .table-head {
+    border: 1px solid;
   }
 `
 
@@ -27,9 +20,8 @@ export const Table = styled.table`
   align-items: center;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
   background-color: ${({ theme }) => theme.colors.white};
+  width: 100%;
 `
-
-export const TableHead = styled.thead``
 
 export const TableHeader = styled.th`
   display: flex;
@@ -41,6 +33,19 @@ export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  max-height: 75rem; /* Defina a altura máxima desejada */
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.text};
+    border-radius: 0.25rem;
+  }
 `
 
 export const TableData = styled.td`
@@ -61,5 +66,21 @@ export const TableRow = styled.tr`
   padding: 1rem;
   &:first-child {
     margin-top: 1rem;
+  }
+`
+export const TableHead = styled.thead``
+
+export const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 0px 8px;
+  border-radius: 0.6rem;
+  width: 100%;
+
+  .search-sort {
+    display: flex;
+    gap: 4rem;
   }
 `

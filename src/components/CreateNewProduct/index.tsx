@@ -4,8 +4,10 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { PlusCircle } from 'phosphor-react'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../services/firebase'
+import { Button } from '../Button'
+import { toast } from 'react-toastify'
 
 const createNewProductFormSchema = z.object({
   product: z
@@ -29,17 +31,36 @@ const CreateNewProduct: React.FC = () => {
 
   const product = watch('product')
   const isSubmitDisabled = !product
-  const productsCollectionRef = collection(db, 'products')
+
   const createNewClient = async ({ product }: CreateNewClientFormData) => {
-    const currentDate = new Date()
-    const formattedDate = currentDate.toISOString()
-    const newProduct = {
-      name: product,
-      createdAt: formattedDate,
+    const productsCollectionRef = collection(db, 'products')
+
+    try {
+      const productExistsQuery = query(
+        productsCollectionRef,
+        where('name', '==', product),
+      )
+      const existingProducts = await getDocs(productExistsQuery)
+
+      if (existingProducts) {
+        toast.error('Produto já cadastrado')
+        return
+      }
+
+      const currentDate = new Date()
+      const formattedDate = currentDate.toISOString()
+      const newProduct = {
+        name: product,
+        createdAt: formattedDate,
+      }
+
+      await addDoc(productsCollectionRef, newProduct)
+      reset()
+      toast.success('Produto criado')
+    } catch (error) {
+      console.error('Ocorreu um erro ao criar o produto:', error)
+      toast.error('Erro ao criar o produto')
     }
-    await addDoc(productsCollectionRef, newProduct)
-    reset()
-    console.log('product', newProduct)
   }
 
   return (
@@ -54,10 +75,15 @@ const CreateNewProduct: React.FC = () => {
           />
           {errors.product && <span>{errors.product.message}</span>}
         </S.Wrapper>
-        <S.Button type="submit" disabled={isSubmitDisabled}>
-          <PlusCircle weight="bold" />
-          Create
-        </S.Button>
+        <Button.Root
+          width="10rem"
+          padding="0.8rem"
+          type="submit"
+          disabled={isSubmitDisabled}
+        >
+          <Button.Icon icon={PlusCircle} weight="bold" />
+          <Button.Text text="Criar" />
+        </Button.Root>
       </S.FormNewProduct>
     </S.Container>
   )

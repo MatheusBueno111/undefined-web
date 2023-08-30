@@ -19,6 +19,10 @@ export const Container = styled.div`
     width: 100%;
     background-color: ${({ theme }) => theme.colors.white};
   }
+
+  .table-head {
+    border: 1px solid;
+  }
 `
 
 export const Table = styled.table`
@@ -41,6 +45,20 @@ export const TableBody = styled.tbody`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  max-height: 81rem; /* Defina a altura máxima desejada */
+  overflow-y: auto;
+
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.text};
+    border-radius: 0.25rem;
+  }
 `
 
 export const TableData = styled.td`
